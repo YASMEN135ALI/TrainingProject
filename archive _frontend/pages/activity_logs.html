@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>سجل النشاطات</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .content {
+            margin-right: 260px;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-3">
+        <h4 class="mb-4">لوحة المدير</h4>
+
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="dashboard-admin.html" class="nav-link text-white">📊 Dashboard</a></li>
+            <li class="nav-item mb-2"><a href="users.html" class="nav-link text-white">👥 Users</a></li>
+            <li class="nav-item mb-2"><a href="permissions.html" class="nav-link text-white">🔐 Permissions</a></li>
+            <li class="nav-item mb-2"><a href="categories.html" class="nav-link text-white">📂 Categories</a></li>
+            <li class="nav-item mb-2"><a href="documents.html" class="nav-link text-white">📄 Documents</a></li>
+            <li class="nav-item mb-2"><a href="search.html" class="nav-link text-white">🔎 Search</a></li>
+            <li class="nav-item mb-2"><a href="activity_logs.html" class="nav-link text-white">📜 Activity Log</a></li>
+            <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white">⚙️ Settings</a></li>
+            <li class="nav-item mt-4"><a href="login.html" class="nav-link text-danger fw-bold">🚪 Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- شريط علوي -->
+        <nav class="navbar navbar-dark bg-dark px-3 mb-4 rounded">
+            <span class="navbar-brand">📜 سجل النشاطات</span>
+
+            <a href="dashboard-admin.html" class="btn btn-secondary btn-sm">رجوع</a>
+        </nav>
+
+        <h3 class="fw-bold mb-4">سجل النشاطات</h3>
+
+        <!-- الفلاتر -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">البحث والتصفية</div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">المستخدم</label>
+                        <input id="filterUser" class="form-control" placeholder="اسم المستخدم">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">العملية</label>
+                        <input id="filterAction" class="form-control" placeholder="إضافة - تعديل - حذف">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">الوثيقة</label>
+                        <input id="filterDocument" class="form-control" placeholder="عنوان أو رقم الوثيقة">
+                    </div>
+
+                </div>
+
+                <div class="d-grid">
+                    <button class="btn btn-primary" onclick="loadActivity()">بحث</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- الجدول -->
+        <div class="card shadow-sm">
+
+            <div class="card-header d-flex justify-content-between">
+                <span class="fw-bold">سجل العمليات</span>
+
+                <button class="btn btn-success btn-sm" onclick="loadActivity()">تحديث</button>
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered table-hover text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>المستخدم</th>
+                            <th>العملية</th>
+                            <th>الوثيقة</th>
+                            <th>التاريخ</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="activityTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/activity_logs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

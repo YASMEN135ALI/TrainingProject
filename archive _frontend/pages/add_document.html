@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة وثيقة</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <!-- شريط علوي -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <span class="navbar-brand mb-0 h1">إضافة وثيقة</span>
+        <a href="documents.html" class="btn btn-secondary btn-sm">رجوع</a>
+    </nav>
+
+    <div class="container mt-4">
+
+        <h3 class="fw-bold mb-4">إضافة وثيقة جديدة</h3>
+
+        <div class="card shadow-sm p-4">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">الرقم المرجعي</label>
+                    <input id="refNumber" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">عنوان الوثيقة</label>
+                    <input id="title" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">التصنيف</label>
+                    <select id="category" class="form-control">
+                        <option value="">اختر التصنيف</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">مستوى السرية</label>
+                    <select id="securityLevel" class="form-control">
+                        <option value="PUBLIC">عام</option>
+                        <option value="INTERNAL">داخلي</option>
+                        <option value="CONFIDENTIAL">سري</option>
+                        <option value="TOP_SECRET">سري للغاية</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="fw-bold">الوصف</label>
+                    <textarea id="description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">مالك الوثيقة</label>
+                    <select id="owner" class="form-control">
+                        <option value="">اختر المالك</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">تاريخ الأرشفة (اختياري)</label>
+                    <input id="archiveDate" type="date" class="form-control">
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="fw-bold">رفع الملف</label>
+                    <input id="attachment" type="file" class="form-control">
+                </div>
+
+            </div>
+
+            <button class="btn btn-success w-100 mt-3" onclick="addDocument()">حفظ الوثيقة</button>
+
+        </div>
+
+    </div>
+
+    <script src="../js/add_document.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+

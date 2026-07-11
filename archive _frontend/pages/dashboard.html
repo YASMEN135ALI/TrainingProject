@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة المدير</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar bg-dark text-white p-3"
+     style="width:250px; height:100vh; position:fixed; top:0; right:0;">
+
+    <h4 class="mb-4">نظام الأرشفة</h4>
+
+    <div class="mb-4">
+        مرحباً:
+        <span id="username" class="fw-bold"></span>
+    </div>
+
+    <ul class="nav flex-column">
+
+        <li class="nav-item mb-2">
+            <a href="dashboard.html" class="nav-link text-white">📊 Dashboard</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="users.html" class="nav-link text-white">👥 Users</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="permissions.html" class="nav-link text-white">🔐 Permissions</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="categories.html" class="nav-link text-white">📂 Categories</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="documents.html" class="nav-link text-white">📄 Documents</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="search.html" class="nav-link text-white">🔎 Search</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="activity_logs.html" class="nav-link text-white">📜 Activity</a>
+        </li>
+
+        <li class="nav-item mb-2">
+            <a href="settings.html" class="nav-link text-white">⚙️ Settings</a>
+        </li>
+
+        <li class="nav-item mt-4">
+            <a href="#" onclick="logout()" class="nav-link text-danger fw-bold">🚪 Logout</a>
+        </li>
+
+    </ul>
+</div>
+
+<!-- Content -->
+<div class="content" style="margin-right:270px; padding:30px;">
+
+    <h2 class="fw-bold mb-4">لوحة التحكم</h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow p-3 text-center">
+                <h5>عدد الوثائق</h5>
+                <h2 id="countDocuments">0</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow p-3 text-center">
+                <h5>عدد المستخدمين</h5>
+                <h2 id="countUsers">0</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow p-3 text-center">
+                <h5>عدد الملفات</h5>
+                <h2 id="countFiles">0</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow p-3 text-center">
+                <h5>الوثائق المؤرشفة</h5>
+                <h2 id="countArchived">0</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header fw-bold">آخر النشاطات</div>
+
+        <div class="card-body">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>المستخدم</th>
+                        <th>العملية</th>
+                        <th>الوثيقة</th>
+                        <th>التاريخ</th>
+                    </tr>
+                </thead>
+
+                <tbody id="activityTable"></tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../js/dashboard.js"></script>
+
+</body>
+</html>

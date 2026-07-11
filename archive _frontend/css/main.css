@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa;
+    font-family: "Tahoma", sans-serif;
+}
+
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 350px;
+}
+
+
+.content {
+    margin-right: 260px;
+    
+    padding: 20px;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>سجل حالات الوثيقة</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .content {
+            margin-right: 260px;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-3">
+        <h4 class="mb-4">لوحة المدير</h4>
+
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="dashboard-admin.html" class="nav-link text-white">📊 Dashboard</a></li>
+            <li class="nav-item mb-2"><a href="users.html" class="nav-link text-white">👥 Users</a></li>
+            <li class="nav-item mb-2"><a href="permissions.html" class="nav-link text-white">🔐 Permissions</a></li>
+            <li class="nav-item mb-2"><a href="categories.html" class="nav-link text-white">📂 Categories</a></li>
+            <li class="nav-item mb-2"><a href="documents.html" class="nav-link text-white">📄 Documents</a></li>
+            <li class="nav-item mb-2"><a href="search.html" class="nav-link text-white">🔎 Search</a></li>
+            <li class="nav-item mb-2"><a href="activity_logs.html" class="nav-link text-white">📜 Activity Log</a></li>
+            <li class="nav-item mb-2"><a href="settings.html" class="nav-link text-white">⚙️ Settings</a></li>
+            <li class="nav-item mt-4"><a href="login.html" class="nav-link text-danger fw-bold">🚪 Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-dark bg-dark px-3 mb-4 rounded">
+            <span class="navbar-brand">📄 سجل حالات الوثيقة</span>
+
+            <a id="backBtn" class="btn btn-secondary btn-sm">رجوع</a>
+        </nav>
+
+        <!-- إضافة حالة جديدة -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white fw-bold">
+                إضافة حالة جديدة
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label class="form-label">الحالة</label>
+                    <select id="newStatus" class="form-control">
+                        <option value="ACTIVE">نشط</option>
+                        <option value="ARCHIVED">مؤرشف</option>
+                        <option value="DELETED">محذوف</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">الملاحظات</label>
+                    <textarea id="newNotes" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button class="btn btn-success" onclick="addStatus()">إضافة</button>
+
+            </div>
+        </div>
+
+        <!-- جدول الحالات -->
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white fw-bold">
+                سجل الحالات
+            </div>
+
+            <div class="card-body">
+                <table class="table table-bordered table-hover text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>الحالة</th>
+                            <th>الملاحظات</th>
+                            <th>قام بالتعديل</th>
+                            <th>التاريخ</th>
+                            <th>العمليات</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="statusTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal: تعديل الحالة -->
+    <div class="modal fade" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">تعديل الحالة</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="hidden" id="editId">
+
+                    <label class="form-label">الحالة</label>
+                    <select id="editStatus" class="form-control">
+                        <option value="ACTIVE">نشط</option>
+                        <option value="ARCHIVED">مؤرشف</option>
+                        <option value="DELETED">محذوف</option>
+                    </select>
+
+                    <br>
+
+                    <label class="form-label">الملاحظات</label>
+                    <textarea id="editNotes" class="form-control" rows="3"></textarea>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" onclick="updateStatus()">حفظ</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/document_status.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
