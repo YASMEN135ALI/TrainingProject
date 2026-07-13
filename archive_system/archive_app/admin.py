@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     User,
-    Permission,
+    Permission,ActivityLog,
     GeneralSettings,
     Document,
     DocumentStatus,
@@ -15,3 +15,5 @@ admin.site.register(GeneralSettings)
 admin.site.register(Document)
 admin.site.register(DocumentStatus)
 admin.site.register(DocumentFiles)
+admin.site.register(ActivityLog)
+admin.site.register( Permission)

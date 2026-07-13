@@ -65,6 +65,7 @@ class DocumentCategoryViewSet(viewsets.ModelViewSet):
 # ============================
 # Document ViewSet
 # ============================
+
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
@@ -86,30 +87,68 @@ class DocumentViewSet(viewsets.ModelViewSet):
         created_at = self.request.query_params.get("created_at")
 
         if reference_number:
-            queryset = queryset.filter(reference_number__icontains=reference_number)
+            queryset = queryset.filter(
+                reference_number__icontains=reference_number
+            )
 
         if title:
-           queryset = queryset.filter(title__icontains=title.strip())
-
-
+            queryset = queryset.filter(
+                title__icontains=title.strip()
+            )
 
         if category:
-            queryset = queryset.filter(category__name__icontains=category)
+            queryset = queryset.filter(
+                categorynameicontains=category
+            )
 
         if status:
             queryset = queryset.filter(status=status)
 
         if security:
-            queryset = queryset.filter(security_level=security)
+            queryset = queryset.filter(
+                security_level=security
+            )
 
         if owner:
-            queryset = queryset.filter(owner__username__icontains=owner)
+            queryset = queryset.filter(
+                ownerusernameicontains=owner
+            )
 
         if created_at:
-            queryset = queryset.filter(created_at__date=created_at)
+            queryset = queryset.filter(
+                created_at__date=created_at
+            )
 
         return queryset.order_by("-created_at")
 
+    def perform_create(self, serializer):
+        document = serializer.save(
+            created_by=self.request.user
+        )
+
+        ActivityLog.objects.create(
+            user=self.request.user,
+            document=document,
+            action="إنشاء وثيقة"
+        )
+
+    def perform_update(self, serializer):
+        document = serializer.save()
+
+        ActivityLog.objects.create(
+            user=self.request.user,
+            document=document,
+            action="تعديل وثيقة"
+        )
+
+    def perform_destroy(self, instance):
+        ActivityLog.objects.create(
+            user=self.request.user,
+            document=instance,
+            action="حذف وثيقة"
+        )
+
+        instance.delete()
 # ============================
 # Document Status ViewSet
 # ============================
