@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>الإعدادات</title>
+    <title>الإعدادات العامة</title>
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -18,21 +18,43 @@
 
     <div class="container mt-4">
 
-        <h3 class="fw-bold mb-4">الإعدادات العامة للنظام</h3>
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">إعدادات النظام</h4>
+            </div>
 
-        <div class="card shadow-sm p-4">
+            <div class="card-body">
 
-            <h5 class="fw-bold mb-3">أنواع الوثائق</h5>
-            <input id="docTypes" class="form-control mb-4" placeholder="مثال: تقارير، عقود، مراسلات">
+                <!-- أنواع الوثائق -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">أنواع الوثائق (JSON)</label>
+                    <textarea id="docTypes" class="form-control" rows="6"
+                        placeholder='{"1":"تقارير","2":"عقود"}'></textarea>
+                    <small class="text-muted">أدخل البيانات بصيغة JSON.</small>
+                </div>
 
-            <h5 class="fw-bold mb-3">مستويات السرية</h5>
-            <input id="securityLevels" class="form-control mb-4" placeholder="مثال: عام، داخلي، سري، سري للغاية">
+                <!-- مستويات السرية -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">مستويات السرية (JSON)</label>
+                    <textarea id="securityLevels" class="form-control" rows="6"
+                        placeholder='{"1":"عام","2":"سري"}'></textarea>
+                    <small class="text-muted">أدخل البيانات بصيغة JSON.</small>
+                </div>
 
-            <h5 class="fw-bold mb-3">قواعد الأرشفة</h5>
-            <textarea id="archiveRules" class="form-control mb-4" rows="4" placeholder="مثال: يتم أرشفة الوثائق بعد 6 أشهر من إنشائها"></textarea>
+                <!-- قواعد الأرشفة -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">قواعد الأرشفة (JSON)</label>
+                    <textarea id="archiveRules" class="form-control" rows="8"
+                        placeholder='{"archive_after":"180","delete_allowed":false}'></textarea>
+                    <small class="text-muted">أدخل البيانات بصيغة JSON.</small>
+                </div>
 
-            <button class="btn btn-success w-100" onclick="saveSettings()">حفظ الإعدادات</button>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success" onclick="saveSettings()">حفظ الإعدادات</button>
+                    <button class="btn btn-secondary" onclick="loadSettings()">إعادة تحميل</button>
+                </div>
 
+            </div>
         </div>
 
     </div>
