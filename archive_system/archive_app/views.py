@@ -176,15 +176,19 @@ class DocumentStatusViewSet(viewsets.ModelViewSet):
 # ============================
 # Document Files ViewSet
 # ============================
+# ============================
+# Document Files ViewSet
+# ============================
+
 class DocumentFilesViewSet(viewsets.ModelViewSet):
     serializer_class = DocumentFilesSerializer
     permission_classes = [IsAuthenticated]
     queryset = DocumentFiles.objects.all()
 
     def get_queryset(self):
-        queryset = (
-            DocumentFiles.objects
-            .select_related("document", "uploaded_by")
+        queryset = DocumentFiles.objects.select_related(
+            "document",
+            "uploaded_by"
         )
 
         document_id = self.request.query_params.get("document")
@@ -197,9 +201,12 @@ class DocumentFilesViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(uploaded_by=self.request.user)
 
+
+
 # ============================
 # Activity Log ViewSet
 # ============================
+
 class ActivityLogViewSet(viewsets.ModelViewSet):
     serializer_class = ActivityLogSerializer
     permission_classes = [IsAuthenticated]
@@ -216,17 +223,50 @@ class ActivityLogViewSet(viewsets.ModelViewSet):
         action = self.request.query_params.get("action")
         document = self.request.query_params.get("document")
 
-        # فلترة حسب اسم المستخدم
+        # ============================
+        # البحث باسم المستخدم
+        # ============================
         if user:
-            queryset = queryset.filter(user__username__icontains=user)
+            queryset = queryset.filter(
+                user__username__icontains=user
+            )
 
-        # فلترة حسب نوع العملية
+        # ============================
+        # البحث بنوع العملية
+        # ============================
         if action:
-            queryset = queryset.filter(action__icontains=action)
+            queryset = queryset.filter(
+                action__icontains=action
+            )
 
-        # فلترة حسب عنوان الوثيقة
+        # ============================
+        # البحث بعنوان الوثيقة
+        # ============================
         if document:
-            queryset = queryset.filter(document__title__icontains=document)
+            queryset = queryset.filter(
+                document__title__icontains=document
+            )
 
         return queryset.order_by("-created_at")
 
+    # ============================
+    # إنشاء سجل نشاط
+    # ============================
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+from rest_framework.permissions import BasePermission
+
+
+class IsAdminOrManager(BasePermission):
+    """
+    Custom permission:
+    Allows access only for users with role 'admin' or 'manager'.
+    """
+
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated
+            and request.user.role in ["admin", "manager"]
+        )

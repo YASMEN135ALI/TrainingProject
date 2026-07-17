@@ -110,5 +110,5 @@ function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("username");
-    window.location.href = "../login.html";
+    window.location.href = "./pages/login.html";
 }
